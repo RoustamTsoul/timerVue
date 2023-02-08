@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 @click="startTimer"  class="timer-display">{{ display }}</h1>
+    <h1 @click="operotor" @dblclick="resetTimer"  class="timer-display">{{ display }}</h1>
   </div>
 </template>
 
@@ -19,7 +19,21 @@ export default {
     },
 
     methods:{
+
+        operotor(){
+            if(!this.flag){
+                this.startTimer();
+                this.flag=true
+            }
+            else{
+                this.stoppedTimer();
+                this.flag=false
+            }
+
+        },
+
        startTimer(){
+        console.log('start')
         if(this.timeBegan === null){
             this.timeBegan = new Date()
         }
@@ -51,7 +65,8 @@ export default {
         (milliseconds = milliseconds < 10 ? '0' + milliseconds:milliseconds);
        },
 
-       resetTime(){
+       resetTimer(){
+        console.log('reset')
         clearInterval(this.startInterval);
         this.timeBegan = null;
         this.timeStopped = null;
